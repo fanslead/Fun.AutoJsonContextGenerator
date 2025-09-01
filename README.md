@@ -81,30 +81,16 @@ string usersJson = JsonSerializer.Serialize(users, AutoJsonContext.Default.ListU
 
 ```json
 {
-  "contextClassName": "MyJsonContext",
-  "namespace": "MyApp.Serialization",
-  "includeCollections": true,
-  "collectionTypes": [
-    "List<{0}>",
+  "namespaces": [],
+  "includeBaseTypes": true,
+  "collectionTemplates": [
+    "System.Collections.Generic.List<{0}>",
     "{0}[]",
-    "IEnumerable<{0}>",
-    "IList<{0}>"
-  ],
-  "excludeTypes": [
-    "MyApp.Models.InternalModel"
+    "System.Collections.Generic.Dictionary<string, {0}>",
+    "System.Collections.Generic.HashSet<{0}>"
   ]
 }
 ```
-
-### 配置说明
-
-| 配置项 | 默认值 | 说明 |
-|--------|--------|------|
-| `contextClassName` | `AutoJsonContext` | 生成的上下文类名 |
-| `namespace` | 当前项目根命名空间 | 生成类的命名空间 |
-| `includeCollections` | `true` | 是否自动包含集合类型 |
-| `collectionTypes` | `["List<{0}>", "{0}[]"]` | 要生成的集合类型模板 |
-| `excludeTypes` | `[]` | 要排除的类型全名列表 |
 
 ## 🔧 高级配置
 
