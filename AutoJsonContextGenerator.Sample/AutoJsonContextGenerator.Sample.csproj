@@ -9,6 +9,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="AutoJson.lock" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <None Include="IBase.cs" />
 	</ItemGroup>
 
