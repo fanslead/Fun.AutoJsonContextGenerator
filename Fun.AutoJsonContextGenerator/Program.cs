@@ -145,7 +145,6 @@ class Program
             sb.AppendLine("");
             sb.AppendLine($"namespace {rootNamespace}");
             sb.AppendLine("{");
-            sb.AppendLine("    [JsonSourceGenerationOptions(WriteIndented = false)]");
 
             foreach (var type in targetTypes.OrderBy(t => t!.Name))
             {
