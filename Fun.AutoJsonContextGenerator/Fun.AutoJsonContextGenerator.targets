@@ -1,0 +1,32 @@
+<Project>
+	<PropertyGroup>
+		<_GeneratedDir>./</_GeneratedDir>
+		<_ConfigPath>$(ProjectDir)autojsonconfig.json</_ConfigPath>
+		<_DefaultConfigPath>$(MSBuildThisFileDirectory)..\contentFiles\autojsonconfig.default.json</_DefaultConfigPath>
+		<_GeneratedFile>$(_GeneratedDir)AutoJsonContext.g.cs</_GeneratedFile>
+	</PropertyGroup>
+
+	<!-- 首次引用时生成默认配置 -->
+	<Target Name="CreateDefaultAutoJsonConfig"
+			BeforeTargets="GenerateAutoJsonContext"
+			Inputs="$(_ConfigPath)"
+			Outputs="$(_ConfigPath)">
+		<Copy Condition="!Exists('$(_ConfigPath)')"
+			  SourceFiles="$(_DefaultConfigPath)"
+			  DestinationFiles="$(_ConfigPath)" />
+	</Target>
+
+	<!-- 运行生成器 -->
+	<Target Name="GenerateAutoJsonContext"
+			BeforeTargets="BeforeCompile"
+			DependsOnTargets="CreateDefaultAutoJsonConfig"
+			Inputs="$(ProjectPath);$(_ConfigPath)"
+			Outputs="$(_GeneratedFile)">
+
+		<Exec Command="dotnet exec &quot;$(MSBuildThisFileDirectory)..\lib\net8.0\Fun.AutoJsonContextGenerator.dll&quot; &quot;$(ProjectPath)&quot; &quot;$(RootNamespace)&quot; &quot;$(_GeneratedDir)&quot;" />
+
+		<ItemGroup>
+			<Compile Include="$(_GeneratedFile)" />
+		</ItemGroup>
+	</Target>
+</Project>

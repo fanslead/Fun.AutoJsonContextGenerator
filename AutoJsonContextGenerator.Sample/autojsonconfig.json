@@ -1,0 +1,10 @@
+{
+  "namespaces": [],
+  "includeBaseTypes": true,
+  "collectionTemplates": [
+    "System.Collections.Generic.List<{0}>",
+    "{0}[]",
+    "System.Collections.Generic.Dictionary<string, {0}>",
+    "System.Collections.Generic.HashSet<{0}>"
+  ]
+}
