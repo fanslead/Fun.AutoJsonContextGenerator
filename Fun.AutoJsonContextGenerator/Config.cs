@@ -8,6 +8,7 @@ public class GeneratorConfig
     public bool IncludeBaseTypes { get; set; } = true;
     public List<string> CollectionTemplates { get; set; } = new()
     {
+        "{0}",
         "System.Collections.Generic.List<{0}>",
         "{0}[]",
         "System.Collections.Generic.Dictionary<string, {0}>"
@@ -18,7 +19,12 @@ public class GeneratorConfig
         var jsonPath = Path.Combine(projectDir, "autojsonconfig.json");
         if (File.Exists(jsonPath))
         {
-            return JsonSerializer.Deserialize<GeneratorConfig>(File.ReadAllText(jsonPath)) ?? new GeneratorConfig();
+            var options = new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                PropertyNameCaseInsensitive = true
+            };
+            return JsonSerializer.Deserialize<GeneratorConfig>(File.ReadAllText(jsonPath), options) ?? new GeneratorConfig();
         }
 
         var editorConfigPath = Path.Combine(projectDir, ".editorconfig");

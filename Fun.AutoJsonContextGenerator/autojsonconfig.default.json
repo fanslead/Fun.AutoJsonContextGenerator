@@ -2,6 +2,7 @@
   "namespaces": [],
   "includeBaseTypes": true,
   "collectionTemplates": [
+    "{0}",
     "System.Collections.Generic.List<{0}>",
     "{0}[]",
     "System.Collections.Generic.Dictionary<string, {0}>",
